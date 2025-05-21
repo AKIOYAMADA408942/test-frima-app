@@ -1,0 +1,15 @@
+.success__content{
+    text-align: center;
+}
+
+.success__heading {
+    font-size: 24px;
+    margin: 60px 0px;
+}
+
+.home__button-submit {
+    padding: 10px 40px;
+    background-color: #82756A;
+    color: white;
+    text-decoration: none;
+}

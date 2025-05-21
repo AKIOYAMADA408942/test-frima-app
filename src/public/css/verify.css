@@ -1,0 +1,20 @@
+.mail-description {
+    margin-top: 80px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.form-resend {
+    text-align: center;
+    margin: 40px 0px;
+}
+.resend__button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.mail-annotation {
+    text-align: center;
+}
