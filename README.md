@@ -3,12 +3,12 @@
 Coachtech模擬案件用のフリマアプリです。  
 
 ## 1 環境構築
-1.1〜1.5までの環境環境構築をして下さい。
+1.1〜1.5までの環境環境構築を行なって下さい。
 
 ### 1.1 Dockerビルド
     1.コマンドラインにてディレクトリを指定およびDockerDesktopを立ち上げる。
     2.リポジトリをクローンする。
-        git clone git@github.com:AKIOYAMADA408942/mock-case1.git
+        git clone git@github.com:AKIOYAMADA408942/flima-app.git
     3.ディレクトリに移動
         cd　flima-app
     4.コンテナの生成および起動
@@ -38,21 +38,21 @@ Coachtech模擬案件用のフリマアプリです。
     8.シンボリックリンクの設定
         php artisan storage:link
 
-初期データについて　　
-* 　CategoryTableSeederクラスはアプリの動作に必要なカテゴリのデータの挿入になりますので必ず実行して下さい。
+初期データについて  
+CategoryTableSeederクラスはアプリの動作に必要なカテゴリのデータの挿入になりますので必ず実行して下さい。
 
 ### 1.3 Stripe決済
     本アプリはstripe決済を利用しています.  
     https://stripe.com/jp にアクセスして、Stripeのアカウントを作成して下さい。作成後、2点の設定を行ってください。  
 
         1. Stripeにログインし、コンビニ支払いを有効にして下さい。順にクリック(ダッシュボードから設定(歯車)→製品の設定欄から決済→決済手段→コンビニ支払いを有効)  
-        2. ダッシュボードからAPIキーを確認して .envファイルに下記欄を設定して下さい。
+        2. ダッシュボードからAPIキーを確認して .envファイルに下記欄を追記して下さい。
 
         STRIPE_KEY=　(公開キー)　　　　　
         STRIPE_SECRET_KEY= (シークレットキー)
 
 ### 1.4 メール認証
-メール認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandbox」->「inboxes」をクリックし「IntegIntegrations」から「laravel7.x and 8.x」を選択し、記載のある下記項目をコピーして　.envファイルに上書きしてください。
+メール認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandbox」->「inboxes」→「MyInbox」の順にクリック「IntegIntegrations」から「laravel7.x and 8.x」を選択し、記載のある下記項目をコピーして　.envファイルに上書きしてください。
 
 
 MAIL_MAILER=  
@@ -62,25 +62,24 @@ MAIL_USERNAME=
 MAIL_PASSWORD=  
 MAIL_ENCRYPTION=  
 
-
 ### 1.5 PHPUnit
 テスト用のデータベースの作成および設定をします。  
 1.mysql コンテナ上でrootユーザーでログイン  
-    
-    myysql -u root -p
 
-2.password:root　でログインし、テスト用データベース
+    mysql -u root -p
+
+2.passwordは[ root ]でログインし、テスト用データベース
 (demo_test)の作成  
 
     CREATE DATABASE demo_test;
 
-3.phpコンテナ内でテスト用のマイグレーションを実行
+3.phpコンテナ内でテスト用のマイグレーションを実行  
 
-php artisan migrate --env=testing
+    php artisan migrate --env=testing
 
-4.　.env.testingファイルでAPP_KEY=　の値が空であることを確認してテスト用のlaravelアプリケーションキーを作成
+4.　.env.testingファイルでAPP_KEY=　の値が空であることを確認してテスト用のlaravelアプリケーションキーを作成  
 
-php arisan key:generate --env=testing
+    php arisan key:generate --env=testing
 
 ## 2　テスト
 試験的に動かす際、2.1〜２.３までお読みの上、動かして下さい。
@@ -120,8 +119,8 @@ password: password
 * コメント送信機能 (CommentTest.php)
 * 商品購入機能(未実装) (PurchaseTest.php)
 * 支払い方法選択機能(未実装)
-* 配送先変更機能(未実装) (AdressTest.php)
-* ユーザー情報取得(未実装) ()
+* 配送先変更機能(未実装) (AddressTest.php)
+* ユーザー情報取得(未実装) 
 * ユーザー情報変更 (ProfileTest.php)
 * 出品商品情報登録 (SellTest.php)
 
