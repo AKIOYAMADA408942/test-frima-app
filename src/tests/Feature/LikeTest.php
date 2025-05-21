@@ -29,7 +29,7 @@ class LikeTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas('likes_count',0); //いいねカウント数が0と確認
 
-        $response = $this->post('/likes',[
+        $response = $this->post('/like',[
             'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
@@ -58,7 +58,7 @@ class LikeTest extends TestCase
         $response->assertSee('likes-number');
         $response->assertDontSee('likes-number__add');
 
-        $response = $this->post('/likes',[
+        $response = $this->post('/like',[
             'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
@@ -89,7 +89,7 @@ class LikeTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        $response = $this->post('/likes',[
+        $response = $this->post('/like',[
             'user_id' => $user->id,
             'item_id' => $item->id,
         ]);

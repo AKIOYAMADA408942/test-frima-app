@@ -30,7 +30,7 @@ class CommentTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas('comments_count',0); //コメント数が0と確認
 
-        $response = $this->post('/item/1',[
+        $response = $this->post('/comment',[
             'item_id' => $item->id,
             'user_id' => $user->id,
             'content' => 'テストコメント',
@@ -53,7 +53,7 @@ class CommentTest extends TestCase
         $this->seed();
         $item = Item::find(1);
 
-        $response = $this->post('/item/1',[
+        $response = $this->post('/comment',[
             'item_id' => $item->id,
             'content' => 'テストコメント',
         ]);
@@ -73,7 +73,7 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user)->get('/item/1');
         $response->assertStatus(200);
 
-        $response = $this->post('/item/1',[
+        $response = $this->post('comment',[
             'item_id' => $item->id,
             'user_id' => $user->id,
             'content' => '',
@@ -95,7 +95,7 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user)->get('/item/1');
         $response->assertStatus(200);
 
-        $response = $this->post('/item/1',[
+        $response = $this->post('comment',[
             'item_id' => $item->id,
             'user_id' => $user->id,
             'content' => Str::random(256),
