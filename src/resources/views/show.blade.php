@@ -36,7 +36,11 @@
                     @csrf
                     <button class="likes__btn" type="submit" class="like-submit">
                         <input type="hidden" name="item_id" value="{{ $item->id }}">
-                        <img class="likes__image" src="{{ asset('img/star.svg')}}" alt="星マーク">
+                        @if($item->mylike === 'likes-number__add')
+                            <img class="likes__image" src="{{ asset('img/favorite-star.svg')}}" alt="星マーク">
+                        @else
+                            <img class="likes__image" src="{{ asset('img/non-favorite-star.svg')}}" alt="星マーク">
+                        @endif
                         <span class="{{ $item->mylike }}">{{ $likes_count }}</span>
                     </button>
                 </form>
@@ -74,11 +78,15 @@
             <h3 class="item-comment__heading">コメント({{ $comments_count }})</h3>
             @foreach($comments as $comment)
                 <div class="item-comment__inner-image">
-                    <img class="item-comment__image" src="{{ $comment->user->thumbnail_path }}" alt="コメントユーザー画像">
+                    @if($comment->user->thumbnail_path === null)
+                        <img class="item-comment__image" src="{{ asset('img/default-profile.svg') }}">
+                    @else
+                        <img class="item-comment__image" src="{{ $comment->user->thumbnail_path }}" alt="コメントユーザー画像">
+                    @endif
                     <p class="item-comment__name">{{ $comment->user->name }}</p>
                 </div>
-                <div class="item-comment__content">
-                    <p>{{ $comment->content }}</p>
+                <div class="item-comment__wrapper">
+                    <p class="item-comment__content">{{ $comment->content }}</p>
                 </div>
             @endforeach
             <form action="/comment" method="post">

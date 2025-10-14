@@ -28,5 +28,10 @@ class Purchase extends Model
 
         return $this->belongsTo(Item::class);
     }
+    
+    public function tradingChatMessages(){
+
+        return $this->hasMany(TradingChatMessage::class);
+    }
 
 }

@@ -51,8 +51,8 @@ CategoryTableSeederクラスはアプリの動作に必要なカテゴリのデ�
         STRIPE_KEY=　(公開キー)　　　　　
         STRIPE_SECRET_KEY= (シークレットキー)
 
-### 1.4 メール認証
-メール認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandbox」->「inboxes」→「MyInbox」の順にクリック「IntegIntegrations」から「laravel7.x and 8.x」を選択し、記載のある下記項目をコピーして　.envファイルに上書きしてください。
+### 1.4 メール送信および認証
+メール送信および認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandbox」->「inboxes」→「MyInbox」の順にクリック「IntegIntegrations」から「laravel7.x and 8.x」を選択し、記載のある下記項目をコピーして　.envファイルに上書きしてください。
 
 
 MAIL_MAILER=  
@@ -79,7 +79,7 @@ MAIL_ENCRYPTION=
 
 4.　.env.testingファイルでAPP_KEY=　の値が空であることを確認してテスト用のlaravelアプリケーションキーを作成  
 
-    php arisan key:generate --env=testing
+    php artisan key:generate --env=testing
 
 ## 2　テスト
 試験的に動かす際、2.1〜２.３までお読みの上、動かして下さい。
@@ -113,15 +113,15 @@ password: password
 * ログアウト機能 (LogoutTest.php)
 * 商品一覧取得 (ListItemTest.php)
 * マイリスト一覧取得 (MylistTest.php)
-* 商品検索機能(未実装) (SearchTest.php)
+* 商品検索機能 (SearchTest.php)
 * 商品詳細情報取得 (DetailItemTest.php)
 * いいね機能 (LikeTest.php)
 * コメント送信機能 (CommentTest.php)
-* 商品購入機能(未実装) (PurchaseTest.php)
-* 支払い方法選択機能(未実装)
-* 配送先変更機能(未実装) (AddressTest.php)
-* ユーザー情報取得(未実装) 
-* ユーザー情報変更 (ProfileTest.php)
+* 商品購入機能 (PurchaseTest.php)
+* 支払い方法選択機能(未実装)(PaymentMethodTest.php(laravel dusk))
+* 配送先変更機能 (AddressTest.php)
+* ユーザー情報取得 (GetProfileTest.php)
+* ユーザー情報変更 (EditProfileTest.php)
 * 出品商品情報登録 (SellTest.php)
 
 各機能テストはphpコンテナ内で下記に上記の()内のファイル名を入れて実行して下さい。
@@ -141,13 +141,91 @@ MySQL 8.0.26
 laravel Fortify  
 Stripe  
 Mailtrap  
+laravel dusk  
 
 ## 4 ER図
-
-![Alt text](ER.png)
+![Alt text](<ER .png>)
 
 ## 5 データテーブル
-![Alt text](table.png)
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| ----------------------------- | ------------------------- | --------------- | ----------- | ---------- | -------- | -------------- |
+| usersテーブル                 | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | name                      | string          |             |            | ○        |                |
+|                               | email                     | string          |             | ○          | ○        |                |
+|                               | email_verified_at         | timestamp       |             |            |          |                |
+|                               | password                  | varchar(255)    |             |            | ○        |                |
+|                               | two_factor_secret         | text            |             |            |          |                |
+|                               | two_facror_recovery_codes | text            |             |            |          |                |
+|                               | rememberToken             | varchar(100)    |             |            |          |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+|                               | postal_code               | varchar(255)    |             |            |          |                |
+|                               | thubmnail_path            | varchar(255)    |             |            |          |                |
+|                               | adress                    | varchar(255)    |             |            |          |                |
+|                               | building                  | varchar(255)    |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| itemsテーブル                 | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | user_id                   | unsigned bigint |             |            | ○        | users(id)      |
+|                               | name                      | varchar(255)    |             |            | ○        |                |
+|                               | condition                 | varchar(255)    |             |            | ○        |                |
+|                               | brand                     | varchar(255)    |             |            |          |                |
+|                               | content                   | text            |             |            | ○        |                |
+|                               | price                     | unsigned bigint |             |            | ○        |                |
+|                               | img_path                  | varchar(255)    |             |            | ○        |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| categoriesテーブル            | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | name                      | varchar(255)    |             | ○          | ○        |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| category_itemテーブル         | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | category_id               | unsigned bigint |             |            | ○        | categories(id) |
+|                               | item_id                   | unsigned bigint |             |            | ○        | items(id)      |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| likesテーブル                 | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | user_id                   | unsigned bigint |             |            | ○        | users(id)      |
+|                               | item_id                   | unsigned bigint |             |            | ○        | items(id)      |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| commentsテーブル              | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | user_id                   | unsigned bigint |             |            | ○        | users(id)      |
+|                               | item_id                   | unsigned bigint |             |            | ○        | items(id)      |
+|                               | content                   | text            |             |            | ○        |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| purchasesテーブル             | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | user_id                   | unsigned bigint |             |            | ○        | users(id)      |
+|                               | item_id                   | unsigned bigint |             |            | ○        | items(id)      |
+|                               | payment_method            | varchar(255)    |             |            | ○        |                |
+|                               | address                   | varchar(255)    |             |            | ○        |                |
+|                               | building                  | varchar(255)    |             |            | ○        |                |
+|                               | postal_code               | varchar(255)    |             |            | ○        |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+|                               | transaction_completed_at  | datetime        |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| trading_chat_messagesテーブル | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | purchase_id               | unsigned bigint |             |            | ○        | purchases(id)  |
+|                               | sender_id                 | unsigned bigint |             |            | ○        | users(id)      |
+|                               | content                   | text            |             |            | ○        |                |
+|                               | chatting_image_path       | varchar(255)    |             |            |          |                |
+|                               | is_read                   | tinyint(1)      |             |            |          |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
+| テーブル名                    | カラム名                  | 型              | PRIMARY KEY | UNIQUE KEY | NOT NULL | FOREIGN KEY    |
+| reviewsテーブル               | id                        | unsigned bigint | ○           |            | ○        |                |
+|                               | purchase_id               | unsigned bigint |             |            | ○        | purchases(id)  |
+|                               | reviewer_id               | unsigned bigint |             |            | ○        | users(id)      |
+|                               | reviewee_id               | unsigned bigint |             |            | ○        | users(id)      |
+|                               | score                     | tinyint         |             |            | ○        |                |
+|                               | created_at                | timestamp       |             |            |          |                |
+|                               | updated_at                | timestamp       |             |            |          |                |
 ## 6 URL
 * 開発環境 http://localhost/
 * phpMyAdmin http://localhost:8080/

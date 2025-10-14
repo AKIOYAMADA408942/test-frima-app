@@ -20,6 +20,9 @@ class UserTableSeeder extends Seeder
             'email' => 'test1@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
+            'postal_code' => '000-0000',
+            'address' => 'テスト県テスト市テスト町',
+            'building' => 'テストビル',
         ];
         DB::table('users')->insert($param);
 
@@ -28,6 +31,9 @@ class UserTableSeeder extends Seeder
             'email' => 'test2@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
+            'postal_code' => '000-0000',
+            'address' => 'テスト県テスト市テスト町',
+            'building' => 'テストビル',
         ];
         DB::table('users')->insert($param);
 
@@ -36,6 +42,9 @@ class UserTableSeeder extends Seeder
             'email' => 'test3@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
+            'postal_code' => '000-0000',
+            'address' => 'テスト県テスト市テスト町',
+            'building' => 'テストビル',
         ];
         DB::table('users')->insert($param);
 

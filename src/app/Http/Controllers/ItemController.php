@@ -8,14 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Like;
-use App\Models\User;
 use App\Models\Purchase;
 
 class ItemController extends Controller
 {
     public function index(Request $request)
     {
-
         $page = $request->query('page');
         $keyword = $request->keyword;
 
@@ -24,42 +22,35 @@ class ItemController extends Controller
         {
             if($page === 'mylist')
             {
-                $keyword = session('keyword');
+                // マイリストページ
                 $items = Like::where('user_id', Auth::id());
                 $items = $items->whereHas('item',function($query)
                     {
                         $query->where('user_id', '!=', Auth::id());
                     });
-                
+
                 if(!empty($keyword))
                 {
                     $items = $items->whereHas('item',function($query) use($keyword)
                     {
                         $query->where('name','like','%'. $keyword . '%');
                     });
-                    $keyword = null;
                 }
-
                 $items = $items->get();
 
             } else {
-
+                //　おすすめページ
                 $items = Item::where('user_id', '!=', Auth::id());
-                
-                if(session()->has('keyword'))
-                {
-                    session()->forget('keyword');
-                }
-                
+
                 if(!empty($keyword))
                 {
                     session()->flash('keyword',$keyword);
                     $items = $items->where('name','like','%'. $keyword . '%');
                 }
-
                 $items = $items->get();
             }
         } else {
+            // 未ログインユーザー
             if(!empty($keyword))
             {
                 $items = Item::where('name','like','%'. $keyword . '%')->get();
@@ -123,7 +114,6 @@ class ItemController extends Controller
         } else {
             like::destroy($like->id);
         }
-
         return redirect()->route('show',$item_id);
     }
 }

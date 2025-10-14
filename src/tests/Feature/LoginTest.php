@@ -12,7 +12,6 @@ class LoginTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *　2 ログイン機能
      * @return void
      */

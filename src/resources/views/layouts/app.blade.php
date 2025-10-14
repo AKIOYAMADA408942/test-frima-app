@@ -18,6 +18,9 @@
         <form class="header-search" action="{{ route('index') }}" method="get">
             <div class="header-search__inner">
                 <input class="header-search__input" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ session('keyword')}}">
+                @if(isset($page) && $page  === 'mylist')
+                    <input type="hidden" name="page" value="mylist">
+                @endif
             </div>
         </form>
         <nav class="header-nav">

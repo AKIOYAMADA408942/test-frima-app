@@ -32,41 +32,32 @@
             <a class="@if($page === 'sell') tab-active @else tab @endif" href="{{ route('mypage',['page' => 'sell' ])}}">出品した商品</a>
             <a class="@if($page === 'buy') tab-active @else tab @endif" href="{{ route('mypage',['page'=> 'buy'])}}">購入した商品</a>
             <a class="@if($page === 'deal') tab-active @else tab @endif" href="{{ route('mypage',['page' => 'deal'])}}">取引中の商品
-                @if(isset($counts) && $counts != 0 )
+                @if(isset($counts) && $counts != 0)
                     <span class="new-record">{{ $counts }}</span>
                 @endif
             </a>
         </div>
     <div class="item-wrapper">
-    @if($page === 'sell')
-        @foreach($items as $item)
+    @if($page === 'deal')
+        @foreach($new_deals as $item)
             <div class="item-card">
-                <a class="item-link" href="/item/{{ $item->id }}">
-                    <img class="item-img" src="{{ $item->img_path }}" alt="商品画像">
-                    <p class="item__name">{{ $item->name }}
-                    @foreach($purchases as $purchase)
-                        @if($item->id == $purchase->item_id)
-                            <span class="sold">Sold</span>
+                <a class="item-link" href="/chat/{{ $item->id }}">
+                    @foreach($new_records as $record)
+                        @if($item->id === $record['purchase_id'])
+                            <p class="message-count">{{ $record['count'] }}</p>
                         @endif
                     @endforeach
-                    </p>
+                    <img class="item-img" src="{{ $item->item->img_path }}" alt="商品画像">
+                    <p class="item__name">{{ $item->item->name }}</p>
                 </a>
             </div>
         @endforeach
-    @endif
 
-    @if($page === 'buy')
-        @foreach($items as $item)
+        @foreach($old_deals as $item)
             <div class="item-card">
-                <a class="item-link" href="/item/{{ $item->id }}">
+                <a class="item-link" href="/chat/{{ $item->id }}">
                     <img class="item-img" src="{{ $item->item->img_path }}" alt="商品画像">
-                    <p class="item__name">{{ $item->item->name }}
-                    @foreach($purchases as $purchase)
-                        @if($item->item->id == $purchase->item_id)
-                            <span class="sold">Sold</span>
-                        @endif
-                    @endforeach
-                    </p>
+                    <p class="item__name">{{ $item->item->name }}</p>
                 </a>
             </div>
         @endforeach

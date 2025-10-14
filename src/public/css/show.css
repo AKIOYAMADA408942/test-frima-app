@@ -58,15 +58,18 @@
     justify-content: left;
     align-items: center;
 }
+
 .likes__form {
     width: 80px;
     margin-left: 50px;
+    height: 100%;
 }
 
 .likes__btn {
     background-color: white;
     border: none;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .likes__image {
@@ -214,10 +217,14 @@
     font-weight: bold;
 }
 
-.item-comment__content {
+.item-comment__wrapper {
     background-color: #E5E5E5;
     padding: 5px;
     margin: 15px 0px;
+}
+
+.item-comment__content {
+    margin-left: 15px;
 }
 
 .comment-form__heading {

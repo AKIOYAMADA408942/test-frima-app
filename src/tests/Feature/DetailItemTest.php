@@ -14,7 +14,6 @@ class DetailItemTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      * 7 商品詳細情報取得
      * @return void
      */

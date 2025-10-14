@@ -13,7 +13,6 @@ class SearchTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *  6 商品検索機能
      * @return void
      */ 
@@ -70,7 +69,7 @@ class SearchTest extends TestCase
             'keyword' => '革'
         ]));
         $response->assertStatus(200);
-        $response->assertSeeText('革');　
+        $response->assertSeeText('革');
         $response->assertDontSeeText($item->name); //お気に入りにあるアイテム ID=1 腕時計
     }
 }

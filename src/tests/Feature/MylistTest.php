@@ -14,7 +14,6 @@ class MylistTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *  5 マイリスト一覧取得
      * @return void
      */

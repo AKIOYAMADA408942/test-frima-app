@@ -26,7 +26,7 @@ class SellController extends Controller
     {
         $image = $request->file('image');
         $path = Storage::disk('public')->putFile('item_image', $image);
-        $image_path = 'storage' . '/' .$path;
+        $image_path = '/storage' . '/' .$path;
 
         $item->fill(
             [

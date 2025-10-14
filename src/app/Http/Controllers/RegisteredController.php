@@ -46,7 +46,7 @@ class RegisteredController extends Controller
 
         event(new Registered($user = $creator->create($request->all())));
 
-        $this->guard->login($user); //時間があればここを消す　認証をしないおよびセッションでユーザ情報を持たせてメール認証画面へ遷移
+        $this->guard->login($user);
 
         return app(RegisterResponse::class);
     }

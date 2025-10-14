@@ -12,7 +12,6 @@ class LogoutTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *  3 ログアウト機能
      * @return void
      */

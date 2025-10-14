@@ -16,7 +16,6 @@ class SellTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *  15 出品商品情報登録
      * @return void
      */

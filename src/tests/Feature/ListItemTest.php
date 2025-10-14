@@ -13,7 +13,6 @@ class ListItemTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      * 4 商品一覧取得
      * @return void
      */

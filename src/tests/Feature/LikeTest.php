@@ -13,7 +13,6 @@ class LikeTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      * 8 いいね機能
      * @return void
      */

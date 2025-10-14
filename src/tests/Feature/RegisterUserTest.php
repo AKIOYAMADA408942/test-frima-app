@@ -11,7 +11,6 @@ class RegisterUserTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *　1 会員登録機能
      * @return void
      */

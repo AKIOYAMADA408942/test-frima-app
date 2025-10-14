@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisteredController;
+use App\Http\Controllers\TradingChatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,4 +37,11 @@ Route::middleware('auth','verified')->group(function(){
     Route::get('/purchase/{item_id}/success',[PurchaseController::class, 'success'])->name('purchase.success');
     Route::get('/purchase/address/{item_id}',[PurchaseController::class,'addressForm']);
     Route::post('/purchase/address/{item_id}',[PurchaseController::class,'addressEdit']);
+
+    Route::get('/chat/{purchase_id}',[TradingChatController::class,'chatForm']);
+    Route::post('/chat/message/{purchase_id}',[TradingChatController::class,'postMessage']);
+    Route::post('/chat/edit/{chat_id}',[TradingChatController::class,'editMessage']);
+    Route::post('/chat/delete/{purchase_id}',[TradingChatController::class, 'deleteMessage']);
+    Route::post('/deal/complete',[TradingChatController::class, 'completeDeal']);
+    Route::post('/deal/review/{purchase_id}',[TradingChatController::class, 'reviewUser']);
 });

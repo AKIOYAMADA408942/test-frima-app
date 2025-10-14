@@ -8,16 +8,15 @@ use Tests\TestCase;
 use App\Models\User;
 
 
-class ProfileTest extends TestCase
+class EditProfileTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *  14 ユーザー情報変更
      * @return void
      */
     //変更項目が初期値として過去設定されていること
-    public function test_get_profile()
+    public function test_get_edit_profile()
     {
         $this->seed();
 

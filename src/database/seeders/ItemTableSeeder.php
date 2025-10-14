@@ -26,17 +26,17 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '2',
+            'user_id' => '1',
             'name' => 'HDD',
             'price' => '5000',
             'content' => '高速で信頼性の高いハードディスク',
             'img_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg',
-            'condition' => 'やや傷や汚れあり',
+            'condition' => '目立った傷や汚れなし',
         ];
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '3',
+            'user_id' => '1',
             'name' => '玉ねぎ3束',
             'price' => '300',
             'content' => '新鮮な玉ねぎ3束のセット',
@@ -56,7 +56,7 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '2',
+            'user_id' => '1',
             'name' => 'ノートPC',
             'price' => '45000',
             'content' => '高性能なノートパソコン',
@@ -66,7 +66,7 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '3',
+            'user_id' => '2',
             'name' => 'マイク',
             'price' => '8000',
             'content' => '高音質のレコーディング用マイク',
@@ -76,7 +76,7 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '1',
+            'user_id' => '2',
             'name' => 'ショルダーバッグ',
             'price' => '3500',
             'content' => 'おしゃれなショルダーバッグ',
@@ -96,7 +96,7 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '3',
+            'user_id' => '2',
             'name' => 'コーヒーミル',
             'price' => '4000',
             'content' => '手動のコーヒーミル',
@@ -106,7 +106,7 @@ class ItemTableSeeder extends Seeder
         DB::table('items')->insert($param);
 
         $param =[
-            'user_id' => '1',
+            'user_id' => '2',
             'name' => 'メイクセット',
             'price' => '2500',
             'content' => '便利なメイクアップセット',

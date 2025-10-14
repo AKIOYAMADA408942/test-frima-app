@@ -14,7 +14,6 @@ class CommentTest extends TestCase
 {
     use DatabaseMigrations;
     /**
-     * A basic feature test example.
      *
      * 9 コメント送信機能
      * @return void

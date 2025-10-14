@@ -14,7 +14,6 @@ use Exception;
 
 class PurchaseController extends Controller
 {
-    //
     public function purchaseForm(Request $request,$item_id)
     {
 

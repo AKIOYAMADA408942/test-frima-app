@@ -50,4 +50,12 @@ class User extends Authenticatable implements MUstVerifyEmail
 
         return $this->hasMany(Comment::class);
     }
+
+    public function item(){
+        return $this->hasOne(Item::class);
+    }
+
+    public function tradingChatMessages(){
+        return $this->hasMany(tradingChatMessage::class, 'sender_id');
+    }
 }

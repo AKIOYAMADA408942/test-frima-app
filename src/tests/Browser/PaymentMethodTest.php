@@ -22,7 +22,7 @@ class PaymentMethodTest extends DuskTestCase
         
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
-                    ->visit('/purchace/1')
+                    ->visit('/purchase/1')
                     ->assertSelected('#select-payment','選択してください')
                     ->assertSeeNothingIn('#confirm-payment')
                     ->select('#select-payment','コンビニ支払い')
