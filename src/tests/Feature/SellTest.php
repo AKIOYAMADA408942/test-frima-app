@@ -47,7 +47,7 @@ class SellTest extends TestCase
             'brand' => 'テストブランド',
             'content' => 'テスト商品説明',
             'price' => '1234567',
-            'img_path' => 'storage/' . 'item_image/' .$image->hashName(),
+            'img_path' => '/storage' .'/' .'item_image/' .$image->hashName(),
         ]);
         //itemテーブルの最新のデータを取得
         $item = Item::latest('id')->first();

@@ -10,7 +10,7 @@ Coachtech模擬案件用のフリマアプリです。
     2.リポジトリをクローンする。
         git clone git@github.com:AKIOYAMADA408942/test-frima-app.git
     3.ディレクトリに移動
-        cd　test-frima-app
+        cd test-frima-app
     4.コンテナの生成および起動
         docker compose up -d --build  
 
@@ -21,7 +21,7 @@ Coachtech模擬案件用のフリマアプリです。
     2.Composer パッケージのインストール
         composer install
     3. .env.example ファイルをコピーして .env ファイルを作成
-        cp .env.example　.env
+        cp .env.example .env
     4. .env ファイルのデータベース設定を下記に変更
         DB_CONNECTION=mysql
         DB_HOST=mysql

@@ -41,14 +41,16 @@ class GetProfileTest extends TestCase
         $response->assertSee(asset($user->img_path));
 
         //出品した商品一覧　user_id = 2のitem
-        $response->assertSeeText('HDD');
-        $response->assertSeeText('ノートPC');
+        $response->assertSeeText('マイク');
+        $response->assertSeeText('ショルダーバッグ');
         $response->assertSeeText('タンブラー');
+        $response->assertSeeText('コーヒーミル');
+        $response->assertSeeText('メイクセット');
         
         //購入した商品一覧
         $response = $this->get('/mypage?page=buy');
         $response->assertStatus(200);
         $response->assertSeeText('腕時計'); //item_id = 1 購入した腕時計を確認
-        $response->assertDontSeeText('HDD'); //item_id = 2　出品した商品がないことを確認
+        $response->assertDontSeeText('マイク'); //item_id = 2　出品した商品がないことを確認
     }
 }
