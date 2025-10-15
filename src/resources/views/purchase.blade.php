@@ -80,6 +80,9 @@
             @if($errors->any())
                 <p class="purchase-form__error-message">支払い方法もしくは配送先に不備があります。</p>
             @endif
+            @if(session('stripe'))
+                <p class="purchase-form__error-message">Stripe決済画面の接続に失敗しました。ご迷惑をおかけしますが、サイト管理者までお問い合わせください。</p>
+            @endif
             <form action="/purchase/{{ $item->id }}" method="post">
                 @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">

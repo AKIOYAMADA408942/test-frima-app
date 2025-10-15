@@ -42,7 +42,24 @@
         @foreach($items as $item)
             <div class="item-card">
                 <a class="item-link" href="/item/{{ $item->id }}">
-                    <img class="item-img" src="{{ $item->img_path }}" alt="商品画像">
+                    @if($purchases->isEmpty())
+                        <div class="img-wrapper">
+                            <img class="item-img" src="{{ asset($item->img_path) }}" alt="商品画像">
+                        </div>
+                    @else
+                        @foreach($purchases as $purchase)
+                            @if($item->id === $purchase->item_id)
+                                <div class="img-wrapper img-sold">
+                                    <img class="item-img" src="{{ asset($item->img_path) }}" alt="商品画像">
+                                </div>
+                                @break
+                            @elseif($loop->last && $item->id !== $purchase->id)
+                                <div class="img-wrapper">
+                                    <img class="item-img" src="{{ asset($item->img_path) }}" alt="商品画像">
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
                     <p class="item__name">{{ $item->name }}
                     @foreach($purchases as $purchase)
                         @if($item->id == $purchase->item_id)
@@ -58,14 +75,12 @@
     @if($page === 'buy')
         @foreach($items as $item)
             <div class="item-card">
-                <a class="item-link" href="/item/{{ $item->id }}">
-                    <img class="item-img" src="{{ $item->item->img_path }}" alt="商品画像">
+                <a class="item-link" href="/item/{{ $item->item->id }}">
+                    <div class="img-wrapper img-sold">
+                        <img class="item-img" src="{{ asset($item->item->img_path) }}" alt="商品画像">
+                    </div>
                     <p class="item__name">{{ $item->item->name }}
-                    @foreach($purchases as $purchase)
-                        @if($item->item->id == $purchase->item_id)
-                            <span class="sold">Sold</span>
-                        @endif
-                    @endforeach
+                        <span class="sold">Sold</span>
                     </p>
                 </a>
             </div>

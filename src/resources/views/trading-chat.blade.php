@@ -126,11 +126,7 @@
             <form class="complete-form" action="/deal/complete"  method="post">
                 @csrf
                 <input type="hidden" name="purchase_id" value="{{ $purchase->id }}">
-                @if(isset($purchase->transaction_completed_at))
-                    <button class="complete-form__button">ユーザーを評価する</button>
-                @else
-                    <button class="complete-form__button">取引完了する</button>
-                @endif
+                <button class="complete-form__button">取引完了する</button>
             </form>
             @endif
         </div>

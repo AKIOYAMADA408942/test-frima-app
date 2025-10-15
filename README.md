@@ -8,9 +8,9 @@ Coachtech模擬案件用のフリマアプリです。
 ### 1.1 Dockerビルド
     1.コマンドラインにてディレクトリを指定およびDockerDesktopを立ち上げる。
     2.リポジトリをクローンする。
-        git clone git@github.com:AKIOYAMADA408942/flima-app.git
+        git clone git@github.com:AKIOYAMADA408942/test-frima-app.git
     3.ディレクトリに移動
-        cd　flima-app
+        cd　test-frima-app
     4.コンテナの生成および起動
         docker compose up -d --build  
 
@@ -52,15 +52,18 @@ CategoryTableSeederクラスはアプリの動作に必要なカテゴリのデ�
         STRIPE_SECRET_KEY= (シークレットキー)
 
 ### 1.4 メール送信および認証
-メール送信および認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandbox」->「inboxes」→「MyInbox」の順にクリック「IntegIntegrations」から「laravel7.x and 8.x」を選択し、記載のある下記項目をコピーして　.envファイルに上書きしてください。
+メール送信および認証にmailtrapを使用しました。https://mailtrap.io/ja からアクセスしてアカウント登録をお願いします。ログインしたらサイドバーの「sandboxes」をクリック、「MyInbox」をクリック「Integrations」から「sample code」欄から「laravel7.x and 8.x」を選択し、記載のある下記項目1をコピーして　.envファイルに上書きしてください。項目2も任意で架空のメールアドレスを記述してください
 
-
+項目1  
 MAIL_MAILER=  
 MAIL_HOST=  
 MAIL_PORT=  
 MAIL_USERNAME=  
 MAIL_PASSWORD=  
 MAIL_ENCRYPTION=  
+
+項目2  
+MAIL_FROM_ADDRESS=  
 
 ### 1.5 PHPUnit
 テスト用のデータベースの作成および設定をします。  
@@ -82,30 +85,48 @@ MAIL_ENCRYPTION=
     php artisan key:generate --env=testing
 
 ## 2　テスト
-試験的に動かす際、2.1〜２.３までお読みの上、動かして下さい。
-### 2.1 ダミーデータおよびテストアカウント
+試験的に動かす際、2.1〜2.4までお読みの上、動かして下さい。
+
+### 2.1 商品のダミーデータについて
+下記、商品のダミーデータになります。  
+| 商品ID | 商品名           | 価格   | 商品説明                               | コンディション       |
+| ------ | ---------------- | ------ | -------------------------------------- | -------------------- |
+| CO01   | 腕時計           | 15,000 | スタイリッシュなデザインのメンズ腕時計 | 良好                 |
+| CO02   | HDD              | 5,000  | 高速で信頼性の高いハードディスク       | 目立った傷や汚れなし |
+| CO03   | 玉ねぎ3束        | 300    | 新鮮な玉ねぎ3束のセット                | やや傷や汚れあり     |
+| CO04   | 革靴             | 4,000  | クラシックなデザインの革靴             | 状態が悪い           |
+| CO05   | ノートPC         | 45,000 | 高性能なノートパソコン                 | 良好                 |
+| CO06   | マイク           | 8,000  | 高音質のレコーディング用マイク         | 目立った傷や汚れなし |
+| CO07   | ショルダーバッグ | 3,500  | おしゃれなショルダーバッグ             | やや傷や汚れあり     |
+| CO08   | タンブラー       | 500    | 使いやすいタンブラー                   | 状態が悪い           |
+| CO09   | コーヒーミル     | 4,000  | 手動のコーヒーミル                     | 良好                 |
+| CO10   | メイクセット     | 2,500  | 便利なメイクアップセット               | 目立った傷や汚れなし |
+
+### 2.2 テストアカウント
 メール認証済のテストアカウントを３つ用意しましたのでご活用ください。
-商品のダミーデータは10点あります。
+下記、2.1の表にある商品５点ずつを出品したユーザー２名と出品なしのユーザー1名となります。
 
 名前:test1  
 Email: test1@example.com  
-password: password
- 
+password: password  
+出品した商品ID: C01〜C05  
+
 名前:test2  
 Email: test2@example.com  
-password: password
- 
+password: password  
+出品した商品ID: C06〜C10  
+
 名前:test3  
 Email: test3@example.com  
 password: password
 
-### 2.2 Stripe決済におけるテスト
+### 2.3 Stripe決済におけるテスト
 
 カード支払いでテストする場合、https://docs.stripe.com/testing からテストカードの記載がありますのでご確認ください。
 
 コンビニ支払いでテストする場合、印刷画面まで遷移したら、支払い完了は出来ないため、http://localhost//purchase/{item_id}/success からitem_idを指定して決済を完了して下さい。
 
-### 2.3 PHPを用いたテスト
+### 2.4 PHPを用いたテスト
 以下のテストを用意しました。各テスト終了毎にテーブルのドロップおよびマイグレーションを行います。
 
 * 会員登録機能 (RegisterUserTest.php)

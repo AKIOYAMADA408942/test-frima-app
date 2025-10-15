@@ -39,25 +39,25 @@
         </div>
     <div class="item-wrapper">
     @if($page === 'deal')
-        @foreach($new_deals as $item)
+        @foreach($new_deals as $deal)
             <div class="item-card">
-                <a class="item-link" href="/chat/{{ $item->id }}">
+                <a class="item-link" href="/chat/{{ $deal->id }}">
                     @foreach($new_records as $record)
-                        @if($item->id === $record['purchase_id'])
+                        @if($deal->id === $record['purchase_id'])
                             <p class="message-count">{{ $record['count'] }}</p>
                         @endif
                     @endforeach
-                    <img class="item-img" src="{{ $item->item->img_path }}" alt="商品画像">
-                    <p class="item__name">{{ $item->item->name }}</p>
+                    <img class="item-img" src="{{ $deal->item->img_path }}" alt="商品画像">
+                    <p class="item__name">{{ $deal->item->name }}</p>
                 </a>
             </div>
         @endforeach
 
-        @foreach($old_deals as $item)
+        @foreach($old_deals as $deal)
             <div class="item-card">
-                <a class="item-link" href="/chat/{{ $item->id }}">
-                    <img class="item-img" src="{{ $item->item->img_path }}" alt="商品画像">
-                    <p class="item__name">{{ $item->item->name }}</p>
+                <a class="item-link" href="/chat/{{ $deal->id }}">
+                    <img class="item-img" src="{{ $deal->item->img_path }}" alt="商品画像">
+                    <p class="item__name">{{ $deal->item->name }}</p>
                 </a>
             </div>
         @endforeach

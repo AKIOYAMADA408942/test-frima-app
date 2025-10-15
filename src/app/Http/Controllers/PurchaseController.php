@@ -91,7 +91,7 @@ class PurchaseController extends Controller
             return redirect($session->url);
 
         } catch(Exception $e) {
-            return redirect()->back()->withErrors('エラーが発生しました');
+            return redirect()->back()->with('stripe','エラーが発生しました');
         }
     }
 
